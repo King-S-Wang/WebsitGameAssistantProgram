@@ -1,0 +1,1355 @@
+For 5
+	ShowMessage "小号2.0"
+	Delay 1000
+Next
+
+Dim FarmN
+FarmN=ReadUIConfig("FarmN",2)
+Dim PotN
+PotN=ReadUIConfig("PotN",2)
+Dim MissionN
+MissionN = ReadUIConfig("MissionN", 1)
+Dim GongW
+GongW = ReadUIConfig("宫务")
+Dim NeiW
+NeiW = ReadUIConfig("内务")
+Dim Lunci=1
+Dim intX, intY
+Dim x1,y1,x2,y2,i,j,location,error,acount_i,AccountID
+Dim timeF
+Dim YuanY
+YuanY = ReadUIConfig("缘由天定")
+Dim PlantF
+PlantF = ReadUIConfig("种植")
+Dim PlantY
+PlantY = ReadUIConfig("一键种植")
+Dim PlantS
+PlantS = ReadUIConfig("种子")
+Dim Qingan
+Qingan=ReadUIConfig("请安",6)
+Dim success
+Dim PotF
+PotF = 2
+Dim ShizzF
+ShizzF=ReadUIConfig("买次数")
+Dim PotS
+PotS = ReadUIConfig("锅子选种",5)
+Dim PotY
+PotY = False
+Dim flag
+Dim FanwaiF()
+FanwaiF = ReadUIConfig("番外")
+Dim XuanguaF
+XuanguaF=ReadUIConfig("悬挂",0)
+Dim XiuxiF
+XiuxiF=ReadUIConfig("修习")
+Dim countDownN
+countDownN = ReadUIConfig("n分钟", 30)
+Dim 密码="oldking2020"
+AccountID = Array("uZay444842","QJJK182193","XePW455835","rtcz566235","Kwam328138","QHQd786291","nRjy181299","zuSm285948","jhzB715928","KUQg176243","zVsB518885","hTzj373138","rEeL543824","PgeH292168","qamx417562","QSAH825731","FTYq822446","NgVT458125","jjyG192388","gPWB786449","Capb524712","hfnM175824","CHkh878299","fTCt229696","rXFd447427","mNub785967","LbFd242721","NJbj928498","uXeP357688","yJkd846838","vaKw111233","ubCU692288","ytAA187723","uzut971159","usLg326253","gphF638369","zCSR456575","fNsq677879","SJcu364814","nTpx714872","xHAf461658","duYv658744")
+acount_i = 0
+Dim LianmengF
+Dim Week_Day=DateTime.WeekDay()
+															//Goto tes
+FindPic 4, 138, 104, 233, "Attachment:登入.png", "000000", 1, 0.9, intX, intY
+If intX < 0 And intY < 0 Then 
+	Delay 500
+	ShowMessage "请切换到登入界面"
+End If
+Tap 56, 184//切换账号
+Delay 2000
+
+															//Rem tes
+While acount_i < 42
+															//Goto test
+Tap 347, 413//切换账号
+Delay 2000
+Tap 212, 391//输入用户名
+Delay 500
+x1 = AccountID(acount_i)
+InputText x1
+Tap 215, 508
+Delay 500
+InputText 密码
+Delay 1000
+Tap 227, 636
+//静待加载
+intX = -1
+While intX < 0
+	Delay 500
+	FindPic 629,203,695,271, "Attachment:x.png", "000000", 1, 0.9, intX, intY
+Wend
+Tap 672, 235
+Delay 1000
+Tap 365, 920
+intX = -1
+While intX < 0
+	Delay 500
+	FindPic 179,430,312,586, "Attachment:内务.png", "000000", 1, 0.9, intX, intY
+Wend
+Delay 5000
+
+
+//单双号
+If Week_Day mod 2=0 and acount_i mod 2=0 then
+	LianmengF = true
+ElseIf Week_Day mod 2 <> 0 and acount_i mod 2 <> 0 Then
+	LianmengF = True
+Else 
+	LianmengF = False
+End If
+
+Dim showAcc=acount_i+1
+																//Rem test
+For 5
+	ShowMessage showAcc
+	Delay 1000
+Next
+
+If Lunci = 1 Then 
+	Call GongWu(GongW)
+	Call NeiWu(NeiW)
+	Call YuanYou()
+	Call Pot(2, PotS)
+	Call Youli()
+	//Call Weipai()
+	Call Xuyuan()
+	Call Jinbi()
+	Call Xianshi()
+	//Call Shizz(ShizzF)
+	
+ElseIf Lunci = 2 Then
+	Call Lianmeng(LianmengF)
+	
+End If
+
+
+Call Xuangua(XuanguaF)
+//_________________________________________________
+acount_i = acount_i + 1
+If acount_i = 42 Then 
+	acount_i = 0
+	If Lunci = 1 Then 
+		Lunci = 2
+	Else 
+		Lunci = 1
+	End If
+End If
+//切换账号
+QuitL 
+For 5
+	ShowMessage "即将切换账号"
+	Delay 1000
+Next
+
+Tap 664, 954
+Delay 3000
+Tap 534, 879
+Delay 3000
+
+
+Wend
+Sub Youli()
+
+		Delay 300
+		Tap 62, 204//出宫
+		Delay 2000
+		Tap 299, 916
+		Delay 400
+		FindColor 377, 947, 402, 974, "7C71FB", 1, 1.00, intX, intY
+		If intX > -1 And intY > -1 Then 
+			Tap 375,981//游历
+			Delay 2000
+			intX = -1
+			While intX = -1
+				Tap 359,1168//回宫
+				Delay 200
+				FindColor 309, 1134, 425, 1163, "4f4d7b", 1, 0.98, intX, intY
+			Wend
+			Delay 500
+			Tap 357,1020//出发
+			Delay 500
+			Tap 359,863//确定
+			Delay 1000
+			QuitL 				
+		End If
+	Tap 321,761
+	Delay 700
+	Tap 534,838	
+End Sub
+Sub GongWu(GongW)
+	Delay 500
+	Tap 116, 450
+	Delay 2000
+	intX = -1
+	
+	While intX = -1
+			Tap 359, 1086
+			Delay 1000
+			FindColor 551, 1142, 602, 1188, "9898FF", 1, 1, intX, intY
+			//TracePrint intX
+	Wend
+	QuitL()
+	ShowMessage "宫务执行完毕"
+End Sub
+Sub NeiWu(NeiW)
+	Delay 500
+	Tap 256, 491
+	Delay 2000
+		FindColor 464, 454, 488, 483, "9695FF", 1, 0.90, intX, intY
+		While intX > -1
+			Tap 540, 460
+			Delay 1000
+    		FindColor 464, 454, 488, 483, "9695FF", 1, 0.90, intX, intY
+		Wend
+		FindColor 463, 756, 486, 791, "9695FF", 1, 0.90, intX, intY
+		While intX > -1
+			Tap 540, 766
+			Delay 1000
+    		FindColor 463, 756, 486, 791, "9695FF", 1, 0.90, intX, intY
+		Wend	
+		FindColor 464, 1063, 488, 1096, "9695FF", 1, 0.90, intX, intY
+		While intX > -1
+			Tap 540, 1075
+			Delay 1000
+    		FindColor 464, 1063, 488, 1096, "9695FF", 1, 0.90, intX, intY
+		Wend		
+	QuitL()
+	ShowMessage "内务执行完毕"
+End Sub
+Sub YuanYou()
+	Delay 500
+	Tap 356, 792
+	Delay 2000
+	FindColor 511, 1055, 538, 1085, "7C71FB", 1, 0.9, intX, intY
+		
+		While intX > -1
+    			Tap 477, 1114
+    			Delay 5000
+    			Tap 365, 1145
+				Delay 5000
+				Tap 363, 1225
+				Delay 2000
+				FindColor 511, 1055, 538, 1085, "7C71FB", 1, 0.9, intX, intY
+				Delay 1000
+		Wend
+	QuitL() 
+	ShowMessage "缘由天定完成"
+End Sub
+Sub QuitL()
+	Delay 800
+	Tap 55, 62
+	Delay 1500
+End Sub
+Sub Pot(PotN, PotS)
+	Delay 500
+	flag =0
+
+		PotN = CInt(PotN)
+		intX = -1
+		intY = -1
+		Tap 549, 896//进入乐园界面
+		Delay 2000
+		While intX = -1
+			Delay 2000 //确认成功加载
+			FindPic 137, 354, 306, 549, "Attachment:御膳房.png", "000000", 1, 0.7, intX, intY
+		Wend
+		Delay 2000
+		Tap 217, 457 //进入御膳房
+		Delay 1000
+		intX = -1
+		
+		While intX = -1
+			Delay 1000 //确认成功加载御膳房
+			FindPic 273, 494, 459, 625, "Attachment:御膳房2.png", "000000", 1, 0.7, intX, intY
+		Wend
+		
+		For 5
+			Tap 551, 1236//一键收取
+			Delay 500 
+		Next
+
+		FindPic 185, 329, 303, 407, "Attachment:御膳房3.png", "000000", 1, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then//烹饪中
+		Goto break02
+		End If
+
+
+
+		 //手动煮粮
+			
+				i = 0
+				location = Array(225,392,502,392,225,715,502,715,225,1019,502,1019)
+				
+				While i < PotN
+					x1 = location(0 + 2 * i)
+					y1 = location(1 + 2 * i)
+					
+					Tap x1, y1
+					Delay 1000
+					PotSeed (PotS,false)
+					i = i + 1
+					If flag = 1 Then 
+						Goto break01
+					End If
+				Wend
+				Delay 6000
+				Rem break01
+			
+
+
+
+
+		Rem break02
+		QuitL()
+		QuitL()
+End Sub
+Sub PotSeed(PotS,PotY)
+Delay 300
+	Select Case PotS
+		Case 0//初级
+		FindColor 456, 512, 506, 549, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			If PotY = true Then 
+				Tap 526, 502
+			Else 
+				Tap	526, 533
+			End If
+			
+			flag = 0
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else 
+			flag=1//种子没了 flag=1
+		End If
+		Case 1//中级
+		FindColor 456, 674, 506, 720, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			If PotY = true Then 
+				Tap 526, 672
+			Else 
+				Tap	526, 697
+			End If	
+			flag = 0
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else 
+			flag=1
+		End If
+		Case 2//高级
+		FindColor 456, 840, 506, 881, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			If PotY = true Then 
+				Tap 526, 837
+			Else 
+				Tap	526, 860
+			End If	
+			flag = 0
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else 
+			flag=1
+		End If
+		Case 3//精选
+		For 2
+			Swipe 332, 870, 332, 389
+			Delay 300
+		Next
+		Delay 2000
+		FindColor 456, 716, 506, 763, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			Tap 526, 740
+			flag = 0
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else 
+			flag=1
+		End If
+		Case 4//珍惜
+		Delay 2000
+		For 2
+			Swipe 332, 870, 332, 389
+			Delay 300
+		Next
+		FindColor 456, 883, 506, 927, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			Tap 526, 902
+			flag = 0
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else 
+			flag=1
+		End If
+		Case 5//散
+		For 2
+			Tap 355, 385
+			Delay 300
+		Next
+		FindColor 456, 512, 506, 549, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			If PotY = true Then 
+				Tap 526, 502
+			Else 
+				Tap	526, 533
+			End If
+
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else
+			flag = 1
+		
+			
+		End If
+		Case 6//丸
+		For 2
+			Tap 355,385
+			Delay 300
+		Next
+		FindColor 456, 674, 506, 720, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			If PotY = true Then 
+				Tap 526, 672
+			Else 
+				Tap	526, 697
+			End If
+			
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else
+			flag = 1
+		End If
+		Case 7//丹
+		For 2
+			Tap 355,385
+			Delay 300
+		Next
+		FindColor 456, 840, 506, 881, "9695FF", 0, 0.80, intX, intY
+		If intX > -1 And intY > -1 Then 
+			If PotY = true Then 
+				Tap 526, 837
+			Else 
+				Tap	526, 860
+			End If
+			
+			If PotY = true Then 
+				Delay 1000
+				Tap 482, 749
+				Tap 482, 749
+			End If
+		Else 
+			flag = 1
+		End If
+
+	End Select
+	Delay 2000
+	For 2
+		Delay 300
+		Tap 626,293//防止没种子煮不了
+	Next
+
+	
+End Sub
+Sub Yaocao()
+	Delay 2500
+	i = 0
+
+		intX = -1
+		Tap 549, 896//进入乐园界面
+		Tap 549, 896//进入乐园界面
+		Delay 2000
+		While intX = -1
+			Delay 2000 //确认成功加载
+			FindPic 137, 354, 306, 549, "Attachment:御膳房.png", "000000", 1, 0.7, intX, intY
+		Wend
+		For 3
+			Tap 661, 139
+			Delay 500
+		Next
+		For 3
+			Tap 428, 428
+			Delay 300
+		Next
+		Tap 542, 398
+		For 5
+			Tap 666, 298
+			Delay 300
+		Next	
+		Tap 217, 457 //进入御膳房
+		Delay 1000
+		intX = -1
+		
+		While intX = -1
+			Delay 1000 //确认成功加载御膳房
+			FindPic 273, 494, 459, 625, "Attachment:御膳房2.png", "000000", 1, 0.7, intX, intY
+		Wend
+		
+		location = Array(521,677,524,513,520,850)
+		Tap 648, 163//食材
+		Delay 2000
+
+			While i < 3
+			x1 = location(0 + 2 * i)
+			y1 = location(1 + 2 * i)
+			Tap x1, y1
+			Delay 500
+			Tap 519,730//100个
+			Delay 500
+			Tap 362,871//购买
+			Delay 1000
+			For 4
+				Tap 473,206//去除购买成功
+				Delay 300
+			Next
+			If i = 0 Then 
+				For 2
+					Swipe 357,868,364,246//上滑
+					Delay 600
+				Next
+			End If
+		
+			i = i + 1
+			Wend
+		
+		For 3
+			Tap 628, 304
+			Delay 300
+		Next
+		QuitL()
+		QuitL()
+		
+
+End Sub
+Sub Xuyuan()
+	Delay 300
+	Tap 62, 204//出宫
+	Delay 2000
+	FindColor 412, 623, 450, 658, "7C71FB", 1, 1.00, intX, intY
+	If intX > -1 And intY > -1 Then 
+		Tap 414, 669
+		Delay 2000
+		FindColor 316, 3, 370, 42, "7C71FB", 1, 1.00, intX, intY
+
+		If intX > -1 And intY > -1 Then //兑换许愿卡
+			Tap 348, 24
+			Delay 1000
+			Tap 361, 886
+			Delay 1000
+			For 2
+				Tap 379, 203
+				Delay 300
+			Next
+		End If
+		FindPic 553,970,616,1033, "Attachment:许愿.png", "000000", 1, 0.9, intX, intY
+		If intX > -1 And intY > -1 Then 
+		Tap 587, 1004
+		Delay 500
+		End If
+
+		
+		
+		FindColor 277, 1140, 305, 1173, "7C71FB", 1, 1.00, intX, intY
+		If intX > -1 And intY > -1 Then //金币许愿
+			Tap 200, 1179
+			Delay 2000
+			For 10
+				Tap 186, 134
+				Delay 400
+			Next
+		End If
+		FindColor 676, 830, 703, 865, "7C71FB", 1, 1.00, intX, intY
+		If intX > -1 And intY > -1 Then //银叶子许愿
+			Tap 696, 877
+			Delay 1000
+			Tap 200, 1179
+			Delay 2000
+			For 10
+				Tap 186, 134
+				Delay 400
+			Next 	
+		End If
+		QuitL
+	End If	
+	Tap 321,761
+	Delay 700
+	Tap 534,838	
+End Sub
+Sub Qiandao()
+	FindPic 622, 253, 711, 1013, "Attachment:福利.png", "000000", 0, 0.8, intX, intY
+	If intX > -1 And intY > -1 Then 
+		Tap intX, intY
+		Delay 5000
+		Tap 201,316
+		Delay 800 
+		Tap 405, 321
+		Delay 800 
+		Tap 615, 322
+		Delay 800 
+		Tap 294, 549
+		Delay 800 
+		Tap 581, 546
+		Delay 800 
+		Tap 216, 777
+		Delay 800 
+		Tap 516, 780
+		Delay 5000
+		For 5
+			Tap 550, 75
+			Delay 300
+		Next
+		QuitL
+	End If
+
+End Sub
+Sub Jinbi()
+	Dim pd_intX
+	Dim pd_intY
+	Delay 300
+	Tap 356, 766
+	Delay 3000
+	Tap 303, 217
+	Delay 3000
+	FindColor 688, 814, 717, 858, "7C71FB", 1, 1.00, pd_intX, intY
+	Delay 1000
+	QuitL 
+	QuitL 
+	//判断是否第一次
+
+	//显示膜拜痕迹
+	Tap 282, 1216
+	intX = -1
+	While intX < 1
+		Delay 500
+		FindPic 32,533,128,584, "Attachment:膜拜.png", "000000", 1, 0.9, intX, intY
+	Wend
+	Delay 1000
+	QuitL 
+	FindColor 310, 1159, 339, 1191, "7C71FB", 1, 0.98, intX,pd_intY
+	TracePrint "判断结束"
+	If pd_intX > -1 or pd_intY > -1 Then 
+		If pd_intX > -1 Then 
+		Tap 350, 782//进入蓝颜
+		Delay 5000
+		
+		Tap 330, 203//进入阿里衮
+		Delay 2000
+		Tap 645, 860//阿里衮暧昧
+		For 7
+			Delay 400
+			Tap 337, 107
+		Next
+		QuitL 
+		 
+		Tap 281,448//进入2
+		Delay 2000
+		Tap 645, 860//2暧昧
+		For 7
+			Delay 400
+			Tap 337, 107
+		Next
+		QuitL  
+		
+		Tap 332,681//进入3
+		Delay 2000
+		Tap 645, 860//3暧昧
+		For 7
+			Delay 400
+			Tap 337, 107
+		Next
+		QuitL  
+		
+		Tap 369,902//进入4
+		Delay 2000
+		Tap 645, 860//4暧昧
+		For 7
+			Delay 400
+			Tap 337, 107
+		Next
+		QuitL
+		QuitL 
+		End If
+		Call Qiandao()
+		Call Yaocao()
+		Call Youjian()
+		Call Xiaobang()
+		//Call Shizz(ShizzF)
+		//密会
+		Call Mihui()
+		//宫廷采办
+		Tap 339, 87
+		Delay 1200
+		Tap 641, 393
+		Delay 500
+		Tap 353, 882
+		Delay 1200
+		Tap 619, 120
+		QuitL 
+		Delay 5000
+		ShowMessage "即将膜拜"
+		//膜拜
+		Tap 282, 1216
+		intX = -1
+		While intX < 1
+			Delay 500
+			FindPic 32,533,128,584, "Attachment:膜拜.png", "000000", 1, 0.8, intX, intY
+		Wend
+		i = 0
+		location = Array(77,141,179,149,293,150,424,141,519,147,641,147)	
+			While i < 6
+				x1 = location(0 + 2 * i)
+				y1 = location(1 + 2 * i)
+				Tap x1, y1
+				For 30
+					Delay 600
+					Tap 610, 1195
+				Next
+				i = i + 1
+			Wend
+		QuitL 	
+		//请安
+		Tap 62, 205//出宫
+		Delay 1000
+		Tap 510, 422
+		Delay 500
+		Tap 435, 497
+		ShowMessage "即将请安"
+		Delay 7000//进入界面
+		Select Case Qingan
+		Case 0//皇后
+			Tap 372, 363
+		Case 1
+			Tap 187,399
+		Case 2
+			Tap 154,573
+		Case 3
+			Tap 111,740
+		Case 4
+			Tap 611,741
+		Case 5
+			Tap 565,575
+		Case 6
+			Tap 531,402	
+		End Select
+		Delay 1300
+		For 8
+			Tap 361, 1204
+			Delay 300
+		Next
+		QuitL 
+		QuitL 
+		//消遣
+		Delay 2000
+		Tap 510, 422
+		Delay 2000
+		Tap 583, 500
+		intX = -1
+		Delay 2000
+		Tap 177, 300
+		Delay 2000
+		Tap 355, 945
+		Delay 2000
+		Tap 599, 268
+		Delay 2000
+		Tap 346, 926
+		Delay 1500
+		For 7
+			Delay 300
+			Tap 402, 47
+		Next
+		QuitL 
+		//大理寺宿敌
+		Tap 150, 804
+		For 2
+			Delay 3000
+			Tap 651,1066
+		Next
+		
+		intX = -1
+		Delay 2000
+		While intX < 0
+			Tap 327, 658
+			Delay 300
+			FindPic 284, 418, 431, 561, "Attachment:大理寺.png", "000000", 1, 0.8, intX, intY
+			If intX > -1 Then 
+				Goto break01
+			End If
+			FindPic 80,580,681,693, "Attachment:大理寺2.png", "000000", 1, 0.7, intX, intY
+		Wend
+		Rem break01
+		Delay 1000
+		Tap 680,35 
+		QuitL
+		//碎片
+		Tap 397, 1209
+		Delay 1000
+		Tap 510, 1039
+		Delay 4000
+		Tap 432,162//特惠礼包
+		Delay 3000
+		Tap 576, 475//领取
+		For 6
+			Delay 300
+			Tap 303,46
+		Next
+		QuitL 
+		Tap 322, 694
+		//研习社
+		FindPic 9,205,101,1001, "Attachment:研习社.png", "000000", 0, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+		 	Tap intX, intY
+		 	Delay 6000
+		 	For 5
+		 		Tap 645, 182
+		 		Delay 500
+		 	Next
+		 	Tap 366, 506//任务
+		 	Delay 2000
+		 	Tap 630, 580//一键领取
+		 	Delay 2000
+		 	Tap 444, 567//本周任务
+		 	Delay 2000
+		 	Tap 630, 580//一键领取
+		 	Delay 2000
+		 	Tap 147,501//奖励
+		 	Delay 2000
+		 	Tap 636, 568
+		 	Delay 2000
+		 	For 4
+		 		Tap 391, 81
+		 		Delay 300
+		 	Next
+		 	QuitL
+		End If
+ 		Tap 534,833	
+	End If	
+End Sub
+Sub Youjian()
+	Delay 500
+	FindPic 623,224,708,974, "Attachment:邮件.png", "000000", 1, 0.9, intX, intY
+	If intX > -1 And intY > -1 Then 
+		Tap intX, intY
+		Delay 5000
+		Tap 532, 1184
+		Delay 3000
+		For 3
+			Tap 180, 1183
+			Delay 500
+		Next
+		Tap 478, 756
+		Delay 1000
+		QuitL 	
+	End If
+
+	Delay 1000 
+End Sub
+Sub Lianmeng(LianmengF)
+	If LianmengF = true Then 
+	Dim LianMB=2
+	Delay 300
+	Tap 62, 204//出宫
+	Delay 2000
+	Tap 189, 338//联盟
+	Delay 5000
+	FindPic 262,401,451,556, "Attachment:联盟.png", "000000", 1, 0.9, intX, intY
+	If intX > -1 And intY > -1 Then 
+		Tap 586,1159//加入联盟
+		Delay 2500
+		Tap 594,412//栀子花
+		Delay 1000
+		FindColor 521,389,672,434, "9695FF", 1, 0.90, intX, intY
+		If intX > -1 And intY > -1 Then 
+			LianMB=0
+			Tap 669,194//X
+			Delay 1000
+			QuitL 
+			Tap 535,842//回宫
+			Delay 2000
+		Else 
+			Tap 669,194//X
+			Delay 1000
+			LianMB = 1	
+		End If
+	End If
+		
+			
+		 
+		
+	If LianMB = 1 Then 
+		FindPic 262,401,451,556, "Attachment:联盟.png", "000000", 1, 0.9, intX, intY
+		While intX > 0
+			ShowMessage "请批准加入联盟"
+			Delay 2000
+			FindPic 262,401,451,556, "Attachment:联盟.png", "000000", 1, 0.9, intX, intY
+		Wend
+		LianMB = 2
+		Delay 5000
+	End If
+	If LianMB = 2 Then 
+		Delay 3000
+		For 5
+			Tap 88, 1172
+			Delay 600
+		Next
+		
+		For 5
+			Tap 555, 884//200
+			Delay 300
+		Next
+		For 5
+			Tap 664,164//x
+			Delay 800
+		Next
+		For 5
+			Tap 416,1170//副本
+			Delay 1000
+		Next
+
+		
+		
+		FindPic 470,531, 625,577, "Attachment:副本.png", "000000", 1, 0.8, intX, intY
+		If intX > -1 And intY > -1 Then 
+			Tap intX, intY//打副本
+			Delay 3000
+			FindPic 230, 565, 283, 622, "Attachment:副本2.png", "000000", 1, 0.8, intX, intY
+			If intX < 0 And intY < 0 Then 
+				Tap 260, 593
+				Delay 1000
+			End If
+			For 5
+				Tap 356, 440
+				Delay 500
+			Next
+			For 5
+				Tap 415, 43
+				Delay 500
+			Next
+			QuitL
+		End If
+		For 5
+			Tap 670,228//X
+			Delay 800
+		Next
+		For 5
+			Tap 306, 1170//兑换
+			Delay 800	
+		Next
+		
+		Tap 170,1026//宫运
+		Delay 1000
+		Tap 517,731//最大
+		Delay 1000
+		Tap 361, 866//购买
+		Delay 5000
+		For 5
+			Tap 387, 207
+			Delay 300
+		Next
+		Tap 170, 483//银票
+		Delay 1000
+		Tap 517,731//最大
+		Delay 1000
+		Tap 361, 866//购买
+		Delay 5000
+		For 5
+			Tap 387, 207
+			Delay 300
+		Next
+		Tap 663, 163
+		Delay 1000
+		Tap 199,1168//查看成员
+		Delay 3000
+		Tap 352,1056//推出联盟
+		Delay 2000
+		Tap 480,788//确定
+		Delay 5000
+		QuitL 
+		Tap 534, 842
+		Delay 2000
+	End If 
+	
+			
+	End If
+End Sub
+Sub Xuangua(XuanguaF)
+	XuanguaF = CInt(XuanguaF)
+	If XuanguaF <> 0 Then 
+			Dim sec=0
+			i = 0
+		While i < XuanguaF
+			While sec<60
+				Delay 1000//1秒
+				ShowMessage "切换账号:" & XuanguaF - i-1 & "分" & 60 - sec & "秒"
+				sec = sec + 1
+			Wend
+		i = i + 1
+		Wend
+	End If	
+End Sub
+Sub Weipai()
+i = 0
+Dim WeipaiF
+Delay 300
+Tap 62, 204//出宫
+Delay 5000
+					//联盟			 //华衣坊		//大理寺			//出城			//回宫			//许愿树			//中宫			//皇宫
+	location = Array(148,241,223,305,209,466,273,525,121,723,188,773,261,799,334,872,502,726,566,795,383,573,461,646,475,319,546,385,338,188,390,241)
+		//领取委派
+		While i < 8
+			x1 = location(0 + 4 * i)
+			y1 = location(1 + 4 * i)
+			x2 = location(2 + 4 * i)
+			y2 = location(3 + 4 * i)
+			FindPic x1, y1, x2, y2, "Attachment:委派1.png", "000000", 1, 0.8, intX, intY
+			ShowMessage "检查委派领取"
+			If intX > -1 And intY > -1 Then 
+				Tap intX, intY
+				Delay 2200
+				Tap 354, 869//领取
+				Delay 3000
+				Tap 644, 189//X
+				
+				Delay 1000
+			End If
+			i=i+1
+		Wend
+		Delay 3000
+		i = 0
+		While i < 8
+			x1 = location(0 + 4 * i)
+			y1 = location(1 + 4 * i)
+			x2 = location(2 + 4 * i)
+			y2 = location(3 + 4 * i)
+			FindPic x1, y1, x2, y2, "Attachment:委派2.png", "000000", 1, 0.7, intX, intY
+			ShowMessage "检查委派"
+			If intX > -1 And intY > -1 Then 
+				Tap intX, intY
+				Delay 2200
+				FindPic 98,755,567,984, "Attachment:委派3.png", "000000", 1, 0.8, intX, intY
+				If intX > -1 And intY > -1 Then 
+					i=8
+					Goto WeipaiBreak
+				End If
+				Tap 363,855//委派
+				Delay 3000
+				Tap 162, 543
+				Delay 1000
+				Tap 349, 534
+				Delay 1000
+				Tap 552, 534
+				Delay 1000
+				Tap 358, 1098
+				Rem WeipaiBreak
+				Delay 3000	
+				Tap 644, 189//X
+				ShowMessage "检查委派中…"
+				Delay 1000
+			End If
+			i=i+1
+		Wend
+	Delay 2000
+	Tap 536, 838
+	ShowMessage "委派完成"
+	Delay 2000
+End Sub
+Sub Xianshi()
+FindPic 621, 211, 711, 987, "Attachment:限时奖励.png", "000000", 1, 0.9, intX, intY
+If intX > -1 And intY > -1 Then 
+	Tap intX, intY
+	Delay 4000
+	i = 0
+	location = Array(322,257,343,289,658,256,680,287,318,679,343,714,661,685,679,715,325,1113,342,1143,658,1113,680,1145,318,886,343,921)
+		//领取
+		While i < 7
+			x1 = location(0 + 4 * i)
+			y1 = location(1 + 4 * i)
+			x2 = location(2 + 4 * i)
+			y2 = location(3 + 4 * i)
+			FindColor x1, y1, x2, y2, "8173F7", 0, 0.9, intX, intY
+
+			
+			While intX > -1
+				Tap intX, intY
+				Tap intX, intY
+				Delay 5000
+				Tap 556, 453
+					Delay 2000
+					Tap 666, 162//x
+					Delay 1000
+				FindColor x1, y1, x2, y2, "8173F7", 0, 0.9, intX, intY
+				TracePrint i
+			Wend
+				
+			i = i + 1
+			If i = 6 Then 
+				For 4
+					Swipe 352, 1051, 357, 366
+					Delay 500
+				Next
+			End If
+		Wend
+	QuitL
+
+End If
+End Sub
+Sub Shengwei()
+FindPic 545, 469, 614, 626, "Attachment:升位.png", "000000", 1, 0.9, intX, intY
+If intX > -1 And intY > -1 Then 
+	Tap intX,intY
+End If	
+End Sub
+Sub Xiaobang()
+Dim XiaobangF
+//乌龟榜 1
+FindPic 613, 211, 711, 982, "Attachment:小榜1.png", "000000", 1, 0.9, intX, intY
+If intX > -1 And intY > -1 Then 
+	XiaobangF = 1
+	Tap intX, intY
+	Delay 3000
+	Tap 357,631//进入活动
+	Delay 5000
+	Tap 351,627
+	Delay 2000
+	Tap 551,447//银币
+	Delay 800
+	Tap 521, 728//最大
+	Delay 600
+	Tap 355,877//购买
+	Delay 1000
+	Tap 376, 324//成功
+	Delay 500
+	Tap 557,713//金币
+	Delay 800
+	Tap 521, 728//最大
+	Delay 600
+	For 2
+		Tap 256, 727
+		Delay 800
+	Next
+	Tap 355,877//购买
+	Delay 1000
+	Tap 376, 324//成功
+	Delay 500
+	Tap 650,103//x
+	Delay 5000
+	FindPic 320,582,401,667, "Attachment:小榜.png", "000000", 1, 0.9, intX, intY
+	While intX < 0
+	
+		Tap 368,749//选择使用
+		Delay 800
+		Swipe 215, 770, 621, 772//20个
+		Tap 367, 870//使用
+		Delay 4000
+		Tap 345,254//成功
+		Delay 800
+		FindPic 320,582,401,667, "Attachment:小榜.png", "000000", 1, 0.9, intX, intY
+	Wend
+
+	
+
+	QuitL 
+	//兑换
+	Tap 653, 817
+	Delay 2000
+	Tap 169, 1008//花
+	Delay 1000
+	Tap 520, 730//最大
+	Delay 500
+	Tap 352, 873//购买
+	Delay 1300
+	Tap 373, 59//成功
+	Delay 500
+	Tap 645,102//x
+	Delay 800
+	QuitL
+	
+End If
+
+End Sub
+Sub Shizz(ShizzF)
+
+If Week_Day = 2 or Week_Day = 3 then
+FindPic 621,210, 710,985, "Attachment:时装周.png", "000000", 1, 0.9, intX, intY
+If intX > -1 And intY > -1 Then
+Tap intX, intY
+Delay 3000
+For 4
+	Tap 617, 56
+	Delay 200
+Next
+If ShizzF = true Then //买两次
+	For 2
+		Tap 594, 1210
+		Delay 1000
+		Tap 483, 779
+		Delay 1200
+	Next
+End If
+Dim simlar=0.55//	0.5自己V别人V		0.6自己X	别人V	0.8自己识别错误
+Dim intSzX,intSzY
+Dim Szzx1=126
+Dim Szzy1=225
+Dim Szzx2=556
+Dim Szzy2=982
+FindPic 328,1183,460,1241, "Attachment:时装周2.png", "000000", 1, 0.9, intSzX, intSzY
+While intSzX < 0
+	
+	//1
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S1.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+		TracePrint "1"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "1"
+	TracePrint intX
+	//2
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S2.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+		TracePrint "2"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "2"
+	TracePrint intX
+	//3
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S3.png", "000000", 1,simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+		TracePrint "3"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "3"
+	TracePrint intX
+	//4
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S4.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+	 	TracePrint "4"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "4"
+	TracePrint intX
+	//5
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S5.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+		TracePrint "5"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX 
+	End If
+	TracePrint "5"
+	TracePrint intX
+	//6
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S6.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+	 	TracePrint "6"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "6"
+	TracePrint intX
+	//7
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S7.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+		TracePrint "7"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "7"
+	TracePrint intX
+	//8
+	FindPic Szzx1,Szzy1,Szzx2,Szzy2, "Attachment:S8.png", "000000", 1, simlar, intX, intY
+	If intX > -1 And intY > -1 Then 
+		TracePrint "8"
+		TracePrint "符合"
+		Tap 163, 1056
+		Goto ShizX
+	End If
+	TracePrint "8"
+	TracePrint intX
+	//不符合 魅力
+	//TracePrint "X" 	
+	FindPic 613, 211, 711, 982, "Attachment:时装周3.png", "000000", 1, 0.7, intX, intY
+	//TracePrint "刷新有吗"
+	//TracePrint intX
+	If intX <0 And intY <0 Then 
+		Tap 362, 1088
+	Else 
+		For 3
+			ShowMessage "不符合"
+			Delay 1000
+		Next
+		
+		Tap 557, 1061
+	End If
+	Rem ShizX
+	Delay 6000//加载
+	
+	FindPic 328,1183,460,1241, "Attachment:时装周2.png", "000000", 1, 0.9, intSzX, intSzY
+Wend
+For 2
+	Tap 111, 1208
+	Delay 3200
+	Tap 356, 986
+	Delay 500
+Next
+QuitL 
+End If
+End If
+End Sub
+Sub Mihui()
+	//密会
+		Tap 477, 226
+		Delay 3000
+		Tap 83, 573
+		Delay 3000
+		FindColor 479,753, 583,940, "9897FE", 0, 0.90, intX, intY
+		If intX > -1 And intY > -1 Then		
+			Tap intX, intY
+		Else 
+			Tap 530, 664
+		End If
+		Delay 1500
+		i=0
+//		While i<30
+//			Delay 1000//1秒
+//			ShowMessage "快速密会:" & 30 - i-1 & "秒"
+//			i =i + 1
+//		Wend
+		Delay 2000
+		For 17
+		Tap 230, 985
+			Delay 400
+		Next
+		Delay 2000
+		Tap 621, 267
+		Delay 5000
+		ShowMessage "即将采办"
+		QuitL 
+End Sub
